@@ -38,6 +38,21 @@ app.get('/about', function(req,res) {
 	});
 });
 
+app.get('/tours', function (req,res) {
+	res.render('tours/tours', {
+		currency: {
+			name: 'Доллары США',
+			abbrev: 'USD',
+		},
+		tours: [
+			{ name: 'Река Худ', price: '$99.95' },
+			{ name: 'Орегон Коуст', price: '$159.95' },
+		],
+		specialsUrl: '/january-specials',
+	});
+})
+// taza tours ej srqel for_ov
+
 app.get('/tours/hood-river', function (req,res) {
 	res.render('tours/hood-river');
 });

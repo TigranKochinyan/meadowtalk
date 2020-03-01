@@ -1,0 +1,28 @@
+<ul>
+    {{#each tours}}
+        {{! Я в новом блоке... и контекст изменился }}
+        <li>
+            {{name}} - {{price}}
+            {{#if ../currencies}}
+                ({{../currency.abbrev}})
+            {{/if}}
+        </li>
+    {{/each}}
+</ul>
+{{#unless currencies}}
+    <p>Все цены в {{currency.name}}.</p>
+{{/unless}}
+
+{{#if specialsUrl}}
+    {{! Я в новом блоке... но контекст вроде бы не изменился }}
+    <p>Проверьте наши <a href="{{specialsUrl}}">специальные предложения!</p>
+{{else}}
+    <p>Просьба чаще пересматривать наши специальные предложения.</p>
+{{/if}}
+    <p>
+    {{#each currencies}}
+        <a href="#" class="currency">{{.}}</a>
+    {{else}}
+    к сожалению, в настоящее время мы принимаем только {{currency.name}}.
+    {{/each}}
+    </p>
