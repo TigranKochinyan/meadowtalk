@@ -2,9 +2,11 @@
 <html>
     <head>
         <title>Meadowalk Travel</title>
+        {{{_sections.head}}}
         {{#if showTests}}
             <link rel="stylesheet" href="/vendor/mocha.css">
         {{/if}}
+        
         <script src="//code.jquery.com/jquery-2.0.2.min.js"></script>
     </head>
     <body>
@@ -13,6 +15,10 @@
         </header>
 
         {{{body}}}
+
+        {{{_sections.jquery}}}
+
+        
 
         {{#if showTests}}
             <div id="mocha"></div>
