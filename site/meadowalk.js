@@ -3,17 +3,17 @@ const fortune = require('./lib/fortune.js');
 
 var app = express();
 
-//утановка механизма представления handlebars
-var handlebars = require('express-handlebars')
-	.create({ defaultLayout: 'main',
-	helpers:{
-		section: function(name, options) { 
-			if (!this._sections) this._sections = {};
-			  this._sections[name] = options.fn(this); 
-			  return null;
+var handlebars = require('express-handlebars').create({
+	defaultLayout:'main',
+	helpers: {
+		section: function(name, options){
+			if(!this._sections) this._sections = {};
+				this._sections[name] = options.fn(this);
+				return null;
 			}
 	}
 });
+
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
@@ -102,6 +102,20 @@ app.get('/tours/hood-river', function (req,res) {
 
 app.get('/tours/request-group-rate', function (req,res) {
 	res.render('tours/request-group-rate');
+});
+
+
+app.get('/nursery-rhyme', function(req, res){
+		res.render('nursery-rhyme');
+});
+
+app.get('/data/nursery-rhyme', function(req, res){
+	res.json({
+		animal: 'бельчонок',
+		bodyPart: 'хвост',
+		adjective: 'пушистый',
+		noun: 'черт',
+	});
 });
 
 // пользователская странца 404 ... (промежутчное ПО)??
