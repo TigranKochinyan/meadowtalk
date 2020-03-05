@@ -118,6 +118,21 @@ app.get('/data/nursery-rhyme', function(req, res){
 	});
 });
 
+app.post('/process', function(req,res) {
+	// console.log(req);
+	// res.status(304);
+	// res.writeHead(301,
+	// 	{Location: 'http://localhost:3000/'}
+  	// );
+	  // res.end();
+	
+	res.status(303).redirect('/');//status 303 see other (смотрите также)
+	console.log(res.status());
+	
+  
+	
+})
+
 // пользователская странца 404 ... (промежутчное ПО)??
 app.use(function(req,res, next){
 	res.status(404);
