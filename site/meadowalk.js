@@ -33,6 +33,7 @@ app.use(function(req, res, next){
 	next();
 });
 
+app.use(require('body-parser').urlencoded({ extended: true }));
 
 
 function getWeatherData(){
@@ -67,7 +68,11 @@ function getWeatherData(){
 
 
 
-
+app.get('/newsletter', function(req, res){
+	// мы изучим CSRF позже... сейчас мы лишь
+	// заполняем фиктивное значение
+	res.render('newsletter', { csrf: 'CSRF token goes here' });
+});
 
 
 app.get('/', function(req,res) {
@@ -118,20 +123,13 @@ app.get('/data/nursery-rhyme', function(req, res){
 	});
 });
 
-app.post('/process', function(req,res) {
-	// console.log(req);
-	// res.status(304);
-	// res.writeHead(301,
-	// 	{Location: 'http://localhost:3000/'}
-  	// );
-	  // res.end();
-	
-	res.status(303).redirect('/');//status 303 see other (смотрите также)
-	console.log(res.status());
-	
-  
-	
-})
+app.post('/process' , function(req, res){
+	console.log('Form (from querystring): ' + req.query. form);
+	console.log('CSRF token (from hidden form field): ' + req.body._csrf);
+	console.log('Name (from visible form field): ' + req.body.name);
+	console.log('Email (from visible form field): ' + req.body.email);
+	res.redirect(303, '/thank-you' );
+});
 
 // пользователская странца 404 ... (промежутчное ПО)??
 app.use(function(req,res, next){
