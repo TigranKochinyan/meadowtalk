@@ -37,6 +37,14 @@ app.use(function(req, res, next){
 
 app.use(require('body-parser').urlencoded({ extended: true }));
 
+app.use(require('cookie-parser')(credentials.cookieSecret));
+
+app.use(require('cookie-parser')(credentials.cookieSecret));
+app.use(require('express-session')({
+	resave: false,
+	saveUninitialized: false,
+	secret: credentials.cookieSecret,
+}));
 
 function getWeatherData(){
 	return {
@@ -95,6 +103,7 @@ app.get('/', function(req,res) {
 });
 
 app.get('/about', function(req,res) {
+	res.cookie('ss', 'saw', {signed : true})
 	res.render('about', { 
 		fortune : fortune.getFortune(),
 		pageTestScript : '/qa/tests-about.js' 
